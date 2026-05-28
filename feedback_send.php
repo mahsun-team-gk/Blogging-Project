@@ -10,6 +10,15 @@
         session_start();
         $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
+        $redirectTo = $user_id ? 'main.php' : 'login.php';
+        if (!empty($_POST['redirect_to'])) {
+            $requested = basename($_POST['redirect_to']);
+            $allowed = ['main.php', 'contact_us.php', 'login.php'];
+            if (in_array($requested, $allowed, true)) {
+                $redirectTo = $requested;
+            }
+        }
+
         function sendMail($to, $toName, $subject, $body, $replyToEmail = null, $replyToName = null) {
             $mail = new PHPMailer(true);
             $mail->isSMTP();
@@ -30,14 +39,19 @@
             $mail->send();
         }
 
-        if (isset($_POST['name'], $_POST['email'], $_POST['message'])) {
-            $name = trim($_POST['name']);
-            $email = trim($_POST['email']);
+        if ($_SERVER['REQUEST_METHOD'] === 'POST' && !empty($_POST['message'])) {
             $message = trim($_POST['message']);
+            if ($user_id) {
+                $name = trim($_POST['name'] ?? (($_SESSION['users']['first_name'] ?? '') . ' ' . ($_SESSION['users']['last_name'] ?? '')));
+                $email = trim($_POST['email'] ?? ($_SESSION['users']['email'] ?? ''));
+            } else {
+                $name = trim($_POST['name'] ?? '');
+                $email = trim($_POST['email'] ?? '');
+            }
 
             if ($name === '' || $email === '' || $message === '') {
                 $_SESSION['feedback_error'] = "All fields are required.";
-                header("Location: " . ($user_id ? "main.php" : "login.php"));
+                header("Location: " . $redirectTo);
                 exit;
             }
 
@@ -56,7 +70,7 @@
 
             if (!mysqli_query($connection, $query)) {
                 $_SESSION['feedback_error'] = "Database error. Please try again.";
-                header("Location: " . ($user_id ? "main.php" : "login.php"));
+                header("Location: " . $redirectTo);
                 exit;
             }
 
@@ -76,17 +90,17 @@
                 $_SESSION['feedback_success'] = $user_id 
                     ? "Your feedback has been sent to the admin. Thank you!" 
                     : "Thank you for your feedback! Your message has been recorded. You're not logged in.";
-                header("Location: main.php");
+                header("Location: " . $redirectTo);
                 exit;
 
             } catch (Exception $e) {
                 $_SESSION['feedback_error'] = "Feedback saved, but email failed: " . $e->getMessage();
-                header("Location: " . ($user_id ? "main.php" : "login.php"));
+                header("Location: " . $redirectTo);
                 exit;
             }
         } else {
-            // If form not submitted correctly, redirect to form page
-            header("Location: " . ($user_id ? "main.php" : "login.php"));
+            // If form not submitted correctly, redirect to the requested page or default
+            header("Location: " . $redirectTo);
             exit;
         }
         ?>

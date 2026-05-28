@@ -192,16 +192,16 @@
                 // =================== HERO SECTION ===================
                 public static function site_section() {
             ?>
-            <section class="hover-section">
-                <div class="container-fluid">
-                    <div class="col-12 bg-dark-subtle rounded py-5">  
-                        <div class="container text-center">
-                            <h1 class="display-4 fw-bold mb-4">Share Your Ideas Around The World!</h1>
-                            <p class="lead mb-5 display-6 fw-bold">Your mind is a garden, what you plant grows.</p>
-                            <div class="md-2">
-                                <a href="my_blog.php" class="btn btn-outline-light btn-lg px-4">Thought</a>
-                                <a href="form.php" class="btn btn-outline-primary btn-lg px-4">Write</a>
-                                <a href="form.php" class="btn btn-outline-light btn-lg px-4">Explore Here</a>
+            <section class="hero-section py-5">
+                <div class="container">
+                    <div class="row justify-content-center align-items-center">
+                        <div class="col-xl-8 col-lg-10 text-center">
+                            <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary mb-3">Write. Publish. Inspire.</span>
+                            <h1 class="display-5 fw-bold mb-4">Share your ideas with readers around the world</h1>
+                            <p class="lead text-secondary mb-4">Create thoughtful posts, build your blog, and connect with an engaged community in a beautifully designed writing platform.</p>
+                            <div class="d-flex justify-content-center gap-3 flex-wrap">
+                                <a href="my_blog.php" class="btn btn-primary btn-lg px-4">Browse Blog</a>
+                                <a href="form.php" class="btn btn-outline-primary btn-lg px-4">Start Writing</a>
                             </div>
                         </div>
                     </div>
@@ -242,7 +242,7 @@
     $totalPages = ceil($totalRows / $limit);
 
     // Main fetch query
-    $query = "SELECT * FROM post $where ORDER BY created_at DESC LIMIT 5";
+    $query = "SELECT * FROM post $where ORDER BY created_at DESC LIMIT $limit OFFSET $offset";
     $result = $connection->query($query);
     // =======================[END: Fetch Posts Query]===========================
 
@@ -309,15 +309,15 @@
                 <nav aria-label="Page navigation" class="mt-4">
                         <ul class="pagination justify-content-center">
                             <li class="page-item <?= ($page <= 1) ? 'disabled' : '' ?>">
-                                <a class="page-link" href="?page=<?= $page - 1 ?>&search=<?= urlencode($search) ?>">Previous</a>
+                                <a class="page-link" href="?page=<?= $page - 1 ?>&search_post=<?= urlencode($search) ?>">Previous</a>
                             </li>
                             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                                 <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
-                                    <a class="page-link" href="?page=<?= $i ?>&search=<?= urlencode($search) ?>"><?= $i ?></a>
+                                    <a class="page-link" href="?page=<?= $i ?>&search_post=<?= urlencode($search) ?>"><?= $i ?></a>
                                 </li>
                             <?php endfor; ?>
                             <li class="page-item <?= ($page >= $totalPages) ? 'disabled' : '' ?>">
-                                <a class="page-link" href="?page=<?= $page + 1 ?>&search=<?= urlencode($search) ?>">Next</a>
+                                <a class="page-link" href="?page=<?= $page + 1 ?>&search_post=<?= urlencode($search) ?>">Next</a>
                             </li>
                         </ul>
                     </nav>
@@ -339,7 +339,7 @@
                 c.category_id, 
                 c.category_title, 
                 c.category_description, 
-                pa.post_attachment_path
+                pa.post_attachment_path AS attachment_path
             FROM category c
             LEFT JOIN post_category pc ON c.category_id = pc.category_id
             LEFT JOIN post p ON pc.post_id = p.post_id
@@ -354,16 +354,18 @@
         if ($cat_result && $cat_result->num_rows > 0):
             while ($cat = $cat_result->fetch_assoc()):
         ?>
-        <li class="list-group-item">
-            <a href="category_post.php?category_id=<?= $cat['category_id'] ?>">
-                <?= htmlspecialchars($cat['category_title']) ?>
-            </a><br>
-            <small><?= htmlspecialchars($cat['category_description']) ?></small>
-            <?php if (!empty($cat['attachment_file'])): ?>
-                <div class="mt-2">
-                    <img src="<?= htmlspecialchars($cat['attachment_file']) ?>" alt="Category Image" class="img-fluid" style="max-height: 100px;">
+        <li class="list-group-item border-0 rounded-3 mb-2 shadow-sm p-4">
+            <div class="d-flex align-items-start gap-3">
+                <div class="flex-grow-1">
+                    <a href="category_post.php?category_id=<?= $cat['category_id'] ?>" class="h6 text-decoration-none text-dark fw-bold d-block mb-1">
+                        <?= htmlspecialchars($cat['category_title']) ?>
+                    </a>
+                    <p class="mb-0 text-muted small"><?= htmlspecialchars($cat['category_description']) ?></p>
                 </div>
-            <?php endif; ?>
+                <?php if (!empty($cat['attachment_path'])): ?>
+                    <img src="<?= htmlspecialchars($cat['attachment_path']) ?>" alt="Category Image" class="rounded-3" style="width: 80px; height: 80px; object-fit: cover;">
+                <?php endif; ?>
+            </div>
         </li>
         <?php
             endwhile;
@@ -389,59 +391,65 @@
  // =================== CONTACT US SECTION ===================
                     public static function site_contact_us() {
                 ?>
-                <div class="container-fluid bg-warning-subtle py-3" id="about">
-                    <h1 class="text-center text-white mb-0">Contact Us</h1>
-                </div>
-
-                <div class="container my-5">
-                    <form class="row g-4 needs-validation" novalidate>
-                        <!-- Personal Info -->
-                        <div class="col-lg-6">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0">Personal Information</h5>
-                                </div>
-                                <div class="card-body">
-                                    <!-- Form fields for personal info -->
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <!-- Contact Details -->
-                        <div class="col-lg-6">
-                            <div class="card shadow-sm h-100">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0">Contact Details</h5>
-                                </div>
-                                <div class="card-body">
-                                    <!-- Form fields for contact details -->
+                <section class="contact-page py-5" id="about">
+                    <div class="container">
+                        <div class="row g-5 align-items-center">
+                            <div class="col-lg-5">
+                                <div class="card contact-card shadow-sm border-0 h-100">
+                                    <div class="card-body">
+                                        <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary mb-3">Need help?</span>
+                                        <h2 class="fw-bold mb-3">Contact our team</h2>
+                                        <p class="text-muted mb-4">Whether you want to share feedback, ask a question, or collaborate on a post, we’re here to support your writing journey.</p>
+                                        <ul class="list-unstyled contact-info mb-4">
+                                            <li class="mb-3"><span class="icon">📍</span> 123 Mind Write Avenue, Islamabad</li>
+                                            <li class="mb-3"><span class="icon">✉️</span> <a href="mailto:info@mindwrite.com">info@mindwrite.com</a></li>
+                                            <li><span class="icon">📞</span> +92 300 1234567</li>
+                                        </ul>
+                                        <div class="border-top pt-4">
+                                            <h6 class="mb-2">Office hours</h6>
+                                            <p class="mb-1">Mon – Fri: 9am to 7pm</p>
+                                            <p class="mb-0">Sat: 10am to 3pm</p>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        
-                        <!-- Feedback Section -->
-                        <div class="col-12">
-                            <div class="card shadow-sm">
-                                <div class="card-header bg-light">
-                                    <h5 class="mb-0">Your Message</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="mb-3">
-                                        <label for="helpTextarea" class="form-label">Feedback</label>
-                                        <textarea class="form-control" id="helpTextarea" rows="5"></textarea>
-                                        <div class="form-text">We wait for your positive feedback</div>
+                            <div class="col-lg-7">
+                                <div class="card shadow-sm border-0">
+                                    <div class="card-body p-4 p-md-5">
+                                        <?php if (isset($_SESSION['feedback_success'])): ?>
+                                            <div class="alert alert-success"><?php echo htmlspecialchars($_SESSION['feedback_success']); ?></div>
+                                            <?php unset($_SESSION['feedback_success']); ?>
+                                        <?php endif; ?>
+                                        <?php if (isset($_SESSION['feedback_error'])): ?>
+                                            <div class="alert alert-danger"><?php echo htmlspecialchars($_SESSION['feedback_error']); ?></div>
+                                            <?php unset($_SESSION['feedback_error']); ?>
+                                        <?php endif; ?>
+                                        <form id="contactForm" class="row g-3" method="post" action="feedback_send.php">
+                                            <input type="hidden" name="redirect_to" value="contact_us.php">
+                                            <?php if (!isset($_SESSION['user_id'])): ?>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Your name</label>
+                                                <input type="text" name="name" class="form-control" required>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <label class="form-label">Email address</label>
+                                                <input type="email" name="email" class="form-control" required>
+                                            </div>
+                                            <?php endif; ?>
+                                            <div class="col-12">
+                                                <label class="form-label">Message</label>
+                                                <textarea name="message" class="form-control" rows="6" required></textarea>
+                                            </div>
+                                            <div class="col-12 text-end">
+                                                <button type="submit" class="btn btn-primary btn-lg px-4">Send Message</button>
+                                            </div>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        
-                        <!-- Form Buttons -->
-                        <div class="col-12 text-center">
-                            <a href="contact_us.php" class="btn btn-primary px-5 py-2">Submit</a>
-                            <button class="btn btn-outline-secondary px-5 py-2 ms-3" type="reset">Reset Form</button>
-                        </div>
-                    </form>
-                </div>
+                    </div>
+                </section>
                 <?php
                     }
 // =================== CONTACT US SECTION ===================
