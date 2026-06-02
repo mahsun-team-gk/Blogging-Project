@@ -393,17 +393,26 @@
                 ?>
                 <section class="contact-page py-5" id="about">
                     <div class="container">
-                        <div class="row g-5 align-items-center">
-                            <div class="col-lg-5">
+                        <div class="text-center mb-5">
+                            <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary mb-3">Contact Us</span>
+                            <h2 class="display-6 fw-bold">Let’s build something meaningful together</h2>
+                            <p class="text-secondary mx-auto" style="max-width:680px;">Share your feedback, ask a question, or tell us how Mind Write can help your writing reach more readers.</p>
+                        </div>
+                        <div class="row g-4">
+                            <div class="col-lg-4">
                                 <div class="card contact-card shadow-sm border-0 h-100">
-                                    <div class="card-body">
-                                        <span class="badge rounded-pill bg-primary bg-opacity-10 text-primary mb-3">Need help?</span>
-                                        <h2 class="fw-bold mb-3">Contact our team</h2>
-                                        <p class="text-muted mb-4">Whether you want to share feedback, ask a question, or collaborate on a post, we’re here to support your writing journey.</p>
+                                    <div class="card-body px-4 py-5">
+                                        <div class="d-flex align-items-center justify-content-between mb-4">
+                                            <div>
+                                                <h3 class="h5 fw-bold mb-1">Talk to us</h3>
+                                                <p class="text-muted mb-0">We typically reply within 24 hours.</p>
+                                            </div>
+                                            <div class="badge rounded-pill bg-info bg-opacity-15 text-info">Fast support</div>
+                                        </div>
                                         <ul class="list-unstyled contact-info mb-4">
-                                            <li class="mb-3"><span class="icon">📍</span> 123 Mind Write Avenue, Islamabad</li>
-                                            <li class="mb-3"><span class="icon">✉️</span> <a href="mailto:info@mindwrite.com">info@mindwrite.com</a></li>
-                                            <li><span class="icon">📞</span> +92 300 1234567</li>
+                                            <li><span class="icon"><i class="fas fa-map-marker-alt"></i></span> 123 Mind Write Avenue, Islamabad</li>
+                                            <li><span class="icon"><i class="fas fa-envelope"></i></span> <a href="mailto:info@mindwrite.com">info@mindwrite.com</a></li>
+                                            <li><span class="icon"><i class="fas fa-phone-alt"></i></span> +92 300 1234567</li>
                                         </ul>
                                         <div class="border-top pt-4">
                                             <h6 class="mb-2">Office hours</h6>
@@ -413,15 +422,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-7">
-                                <div class="card shadow-sm border-0">
+                            <div class="col-lg-8">
+                                <div class="card shadow-sm border-0 contact-form-card">
                                     <div class="card-body p-4 p-md-5">
                                         <?php if (isset($_SESSION['feedback_success'])): ?>
-                                            <div class="alert alert-success"><?php echo htmlspecialchars($_SESSION['feedback_success']); ?></div>
+                                            <div class="alert alert-success mb-4"><?php echo htmlspecialchars($_SESSION['feedback_success']); ?></div>
                                             <?php unset($_SESSION['feedback_success']); ?>
                                         <?php endif; ?>
                                         <?php if (isset($_SESSION['feedback_error'])): ?>
-                                            <div class="alert alert-danger"><?php echo htmlspecialchars($_SESSION['feedback_error']); ?></div>
+                                            <div class="alert alert-danger mb-4"><?php echo htmlspecialchars($_SESSION['feedback_error']); ?></div>
                                             <?php unset($_SESSION['feedback_error']); ?>
                                         <?php endif; ?>
                                         <form id="contactForm" class="row g-3" method="post" action="feedback_send.php">
@@ -429,19 +438,23 @@
                                             <?php if (!isset($_SESSION['user_id'])): ?>
                                             <div class="col-md-6">
                                                 <label class="form-label">Your name</label>
-                                                <input type="text" name="name" class="form-control" required>
+                                                <input type="text" name="name" class="form-control form-control-lg" placeholder="Enter your full name" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label class="form-label">Email address</label>
-                                                <input type="email" name="email" class="form-control" required>
+                                                <input type="email" name="email" class="form-control form-control-lg" placeholder="name@example.com" required>
                                             </div>
                                             <?php endif; ?>
                                             <div class="col-12">
+                                                <label class="form-label">Subject</label>
+                                                <input type="text" name="subject" class="form-control form-control-lg" placeholder="What would you like to discuss?" required>
+                                            </div>
+                                            <div class="col-12">
                                                 <label class="form-label">Message</label>
-                                                <textarea name="message" class="form-control" rows="6" required></textarea>
+                                                <textarea name="message" class="form-control form-control-lg" rows="6" placeholder="Tell us your request or feedback" required></textarea>
                                             </div>
                                             <div class="col-12 text-end">
-                                                <button type="submit" class="btn btn-primary btn-lg px-4">Send Message</button>
+                                                <button type="submit" class="btn btn-primary btn-lg px-5">Send Message</button>
                                             </div>
                                         </form>
                                     </div>

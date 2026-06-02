@@ -207,11 +207,28 @@ footer .input-group .btn {
 }
 
 .contact-page {
-  background: #f8fbff;
+  background: linear-gradient(180deg, #eef5ff 0%, #f8fbff 100%);
+}
+
+.contact-card,
+.contact-form-card {
+  border-radius: 1.75rem;
+  overflow: hidden;
 }
 
 .contact-card {
-  border-radius: 1.6rem;
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(13, 110, 253, 0.08);
+}
+
+.contact-form-card {
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.05);
+}
+
+.contact-card .card-body,
+.contact-form-card .card-body {
+  padding: 2.5rem;
 }
 
 .contact-info li {
@@ -219,17 +236,44 @@ footer .input-group .btn {
   align-items: center;
   gap: 0.85rem;
   color: #475569;
+  margin-bottom: 1.2rem;
+}
+
+.contact-info li:last-child {
+  margin-bottom: 0;
 }
 
 .contact-info .icon {
-  width: 2.1rem;
-  height: 2.1rem;
+  width: 2.3rem;
+  height: 2.3rem;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  background: #e7f1ff;
-  border-radius: 0.85rem;
+  background: #eef4ff;
+  border-radius: 0.95rem;
   font-size: 0.95rem;
+  color: #0d6efd;
+}
+
+.contact-form-card .form-label {
+  font-weight: 600;
+}
+
+.contact-form-card .form-control,
+.contact-form-card .form-select {
+  border-radius: 0.85rem;
+  padding: 1rem 1rem;
+}
+
+.contact-form-card .btn-primary {
+  min-width: 180px;
+}
+
+@media (max-width: 992px) {
+  .contact-card .card-body,
+  .contact-form-card .card-body {
+    padding: 1.8rem;
+  }
 }
 
 #feedback-msg .alert {
