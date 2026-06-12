@@ -10,10 +10,10 @@
         session_start();
         $user_id = isset($_SESSION['user_id']) ? $_SESSION['user_id'] : null;
 
-        $redirectTo = $user_id ? 'main.php' : 'login.php';
+        $redirectTo = $user_id ? 'index.php' : 'login.php';
         if (!empty($_POST['redirect_to'])) {
             $requested = basename($_POST['redirect_to']);
-            $allowed = ['main.php', 'contact_us.php', 'login.php'];
+            $allowed = ['index.php', 'contact_us.php', 'login.php'];
             if (in_array($requested, $allowed, true)) {
                 $redirectTo = $requested;
             }

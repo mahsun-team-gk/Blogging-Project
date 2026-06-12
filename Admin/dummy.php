@@ -1,19 +1,19 @@
 <?php
 // =================== START User Registration Script ===================
 session_start();
-require_once("require/database_connection.php");
+require_once(__DIR__ . "/../require/database_connection.php");
 
 
 // PHPMailer imports
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'PHPMailer/src/PHPMailer.php';
-require 'PHPMailer/src/SMTP.php';
-require 'PHPMailer/src/Exception.php';
+require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
+require __DIR__ . '/../PHPMailer/src/SMTP.php';
+require __DIR__ . '/../PHPMailer/src/Exception.php';
 
 // Include FPDF
-require_once("fpdf/fpdf.php");
+require_once(__DIR__ . "/../fpdf/fpdf.php");
 
 // Initialize variables
 $first_name = $last_name = $email = $password = $date_of_birth = $address = $gender = '';
@@ -32,7 +32,7 @@ if (isset($_POST['submit'])) {
 
     // Validation patterns
     $alpha_pattern = '/^[A-Z]{1}[a-z]{2,}$/';
-    $email_pattern = '/^[a-z]+\d*[@]{1}[a-z]+[.]{1}(com|net|org)$/';
+    $email_pattern = '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/';
     $password_pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/';
     $date_pattern = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
 

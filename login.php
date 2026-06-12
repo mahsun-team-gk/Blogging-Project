@@ -84,7 +84,7 @@
 			?>
 
 		<?php if (isset($_GET['error'])): ?>
-    <div style="color: red; margin-bottom: 15px;">
+    <div class="alert alert-danger mt-3" role="alert">
         <?php echo htmlspecialchars($_GET['error']); ?>
     </div>
 		<?php endif; ?>

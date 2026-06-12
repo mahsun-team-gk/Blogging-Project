@@ -80,7 +80,7 @@
                 ];
 
                 // Redirect after success
-                header("Location: " . ($user['role_id'] == 2 ? "main.php" : "admin_file.php"));
+                header("Location: " . ($user['role_id'] == 2 ? "index.php" : "admin_file.php"));
                 exit();
             } else {
                 $errors['general'] = "Something went wrong!";

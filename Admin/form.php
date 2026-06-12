@@ -1,5 +1,6 @@
 <?php
-require_once("require/database_connection.php");
+session_start();
+require_once("../require/database_connection.php");
 require_once("admin_file.php");
 
 ?>
@@ -24,8 +25,7 @@ require_once("admin_file.php");
     </div>
 
     <div class="card-body">
-      <p class="text-center text-success"><?= $_REQUEST['message'] ?? '' ?></p>
-
+      <p class="text-center text-success"><?php echo htmlspecialchars($_SESSION['message'] ?? ''); unset($_SESSION['message'], $_SESSION['color']); ?></p>
       <form action="dummy.php" method="POST" enctype="multipart/form-data" onsubmit="return validation()">
         <div class="row mb-3">
           <div class="col-md-6">
@@ -96,7 +96,7 @@ require_once("admin_file.php");
 </div>
 
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-<script src="client_side_validation.js"></script>
+<script src="../client_side_validation.js"></script>
 
 <script>
   $(document).ready(function () {

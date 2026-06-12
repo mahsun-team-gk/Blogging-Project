@@ -59,9 +59,9 @@
 
                 // Redirect based on role_id
                 if ($role_id == 1) {
-                    header("Location: main.php");
-                } elseif ($role_id == 2) {
                     header("Location: Admin/admin_file.php");
+                } elseif ($role_id == 2) {
+                    header("Location: index.php");
                 } else {
                     echo "Unknown role. Please contact support.";
                 }

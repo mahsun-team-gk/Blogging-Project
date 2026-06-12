@@ -5,13 +5,7 @@
 			require_once("require/database_connection.php");
 
 
-			use PHPMailer\PHPMailer\PHPMailer;
-			use PHPMailer\PHPMailer\SMTP;
-			use PHPMailer\PHPMailer\Exception;
 
-			require 'PHPMailer/src/PHPMailer.php';
-			require 'PHPMailer/src/SMTP.php';
-			require 'PHPMailer/src/Exception.php';
 
 
 			/*echo "<pre>";
@@ -46,59 +40,13 @@
 
 			    /*---------------------Pattern Definitions---------------------------*/
 
-			    $alpha_pattern = '/^[A-Z]{1}[a-z]{2,}$/';
-			    $email_pattern = '/^[a-z]+\d*[@]{1}[a-z]+[.]{1}(com|net|org){1}$/';
-			    $password_pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/';
-			    $date_of_birth_pattern = '/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
-
-			    $flag = true;
+				    $alpha_pattern = '/^[A-Z][a-z]{2,}$/';
+				    $email_pattern = '/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,}$/';
+				    $password_pattern = '/^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_]).{8,}$/';
+				    $date_of_birth_pattern = '/^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/';
 
 
 
-try {
-        $mail = new PHPMailer(true);
-        $mail->isSMTP();
-        $mail->Host = 'smtp.gmail.com';
-        $mail->Port = 587;
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-        $mail->SMTPAuth = true;
-        $mail->Username = 'phpbasic2k25@gmail.com';
-        $mail->Password = 'sffymqljdnupfzjc';
-        
-        
-        $mail->setFrom($email, $first_name);
-        $mail->addAddress('phpbasic2k25@gmail.com', 'Govind Kolhi');
-        $mail->addReplyTo($email, $first_name);
-        
-        $mail->isHTML(true);
-        $mail->Subject = $subject;
-        $mail->Body = $message;
-        
-        
-        if(isset($_FILES['file'])){
-
-            for($i = 0 ; $i < count ($_FILES['file']['name']); $i++) {
-
-                $tmp_name = $_FILES['file']['tmp_name'][$i];
-
-                $name = $_FILES['file']['name'][$i];
-
-                $mail->addAttachment($tmp_name, $name);
-            }
-        }
-        
-        $mail->send();
-        echo "<h1>"."Message has been sent:"."</h1>";
-        echo "<hr/>";
-        echo "<br/>";
-        echo "<hr/>";
-        echo "<br/>";
-    } catch (Exception $e) {
-        echo "<h1>"."Message could not be sent. Mailer Error:"."</h1>";
-    }
-} else {
-    echo ".";
-}
 			    
 			    
 			    /*-------First Name Validation---------------*/
@@ -263,9 +211,7 @@ try {
 			        
 			        mysqli_stmt_close($statement);
 			    }
-			
-
-			// Close connection (at the end of the file)
+	}
 			mysqli_close($connection);
 			?>
 <!-- reg proces start -->

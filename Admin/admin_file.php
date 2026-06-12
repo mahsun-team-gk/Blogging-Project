@@ -2,30 +2,28 @@
 <!-- admin dashboard -->
             <?php 
             session_start();
-                require_once("require/database_connection.php");
-            if (session_status() == PHP_SESSION_NONE) {
-             session_start();
+            require_once("../require/database_connection.php");
+
+            if (!isset($_SESSION['users'])) {
+                header("Location: ../login.php");
+                exit();
             }
-                    if (!isset($_SESSION['users'])) {
-                        header("Location: ../login.php");
-                        exit();
-                    } else {
-                        if ($_SESSION['users']['role_id'] == '1') {
-                            $first_name = $_SESSION['users']['first_name']; 
-                            echo '<div class="container-fluid p-0 sticky-top">
-                                    <div class="row px-0">
-                                        <div class="col-12">
-                                            <h1 class="bg-primary rounded-pill text-white text-center p-3">
-                                                Welcome ' . ($first_name) . ' to Admin Dashboard
-                                            </h1>
-                                        </div>
-                                    </div>
-                                  </div>';
-                        } else {
-                            header("Location: admin_file.php");
-                            exit();
-                        }
-                    }
+
+            if ($_SESSION['users']['role_id'] != '1' && $_SESSION['users']['role_id'] != 1) {
+                header("Location: ../index.php");
+                exit();
+            }
+
+            $first_name = $_SESSION['users']['first_name']; 
+            echo '<div class="container-fluid p-0 sticky-top">'
+                . '<div class="row px-0">'
+               . '<div class="col-12">'
+               . '<h1 class="bg-primary rounded-pill text-white text-center p-3">'
+               . 'Welcome ' . htmlspecialchars($first_name) . ' to Admin Dashboard'
+               . '</h1>'
+               . '</div>'
+               . '</div>'
+               . '</div>';
                  ?>
                 <?php
                 class admin {
@@ -41,15 +39,15 @@
 
 <!-- admin page css -->
             <link rel="stylesheet" type="text/css" href="../bootstrap/css/bootstrap.min.css">
-        <style>
+            <style>
             body{
-                background-color: red !i;
+                background-color: red !important;
             }
             .sidebar {
                 background-color: #343a40;
             }
             .sidebar .nav-link {
-                color: rgba(255, 255, 255, 0.75);
+                color: rgba(255, 255, 255, 0.85);
             }
             .sidebar .nav-link:hover, .sidebar .nav-link.active {
                 color: #fff;
@@ -303,7 +301,7 @@
     © 2025 Your Blog Name. All rights reserved.
 </footer>
  -->        <!-- other content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content py-4">
+            <div class="col-md-9 ms-sm-auto col-lg-10 px-md-4 main-content py-4">
                 <div class="row mb-4">                  
                 </div>
                 
@@ -315,6 +313,10 @@
 
 
     <script src="../bootstrap/js/bootstrap.bundle.min.js"></script>
+
+</main>
+</body>
+</html>
 
 <!-- admin login section -->
 

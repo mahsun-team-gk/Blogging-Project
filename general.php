@@ -139,7 +139,7 @@
             <div class="container-fluid sticky-top px-0 text-center">
                 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
                     <div class="container">
-                        <a class="navbar-brand" href="main.php">
+                        <a class="navbar-brand" href="index.php">
                             <img src="1.png" class="rounded-circle" alt="Mind Write Logo" width="80" height="70">
                             <span class="fw-bold mx-2">Mind Write</span>
                         </a>
@@ -150,7 +150,7 @@
                         
                         <div class="collapse navbar-collapse" id="navbarNav">
                             <ul class="navbar-nav me-auto">
-                                <li class="nav-item"><a class="nav-link fw-bold" href="main.php">Home</a></li>
+                                <li class="nav-item"><a class="nav-link fw-bold" href="index.php">Home</a></li>
                                 <li class="nav-item"><a class="nav-link fw-bold" href="#posts">Posts</a></li>
                                 <li class="nav-item"><a class="nav-link fw-bold" href="my_blog.php">Blog</a></li>
                                 <li class="nav-item"><a class="nav-link fw-bold" href="contact_us.php">Contact US</a></li>
@@ -491,7 +491,7 @@
                             <div class="col-md-2 mb-4 ">
                                 <h6 class="fw-bold mb-3">Quick Links</h6>
                                 <ul class="list-unstyled">
-                                    <li class="mb-2"><a href="main.php" class="text-white text-decoration-none">Home</a></li>
+                                    <li class="mb-2"><a href="index.php" class="text-white text-decoration-none">Home</a></li>
                                     <li class="mb-2"><a href="posts.php" class="text-white text-decoration-none">Posts</a></li>
                                     <li class="mb-2"><a href="my_blog.php" class="text-white text-decoration-none">Blog</a></li>
                                     <li class="mb-2"><a href="contact_us.php" class="text-white text-decoration-none">Contact</a></li>

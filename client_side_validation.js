@@ -3,7 +3,7 @@ function validation() {
 
     /*---------------------Pattern Definitions---------------------------*/
     var alpha_pattern = /^[A-Z]{1}[a-z]{2,}$/;
-    var email_pattern = /^[a-z]+\d*[@]{1}[a-z]+[.]{1}(com|net|org){1}$/;
+    var email_pattern = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
     var password_pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
     var date_of_birth_pattern = /^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$/;
 
@@ -152,12 +152,13 @@ function checkEmailAvailability() {
     var email = document.querySelector("#email").value.trim();
     var email_msg = document.querySelector("#email_msg");
     
-    if (email === "" || !/^[a-z]+\d*[@]{1}[a-z]+[.]{1}(com|net|org){1}$/.test(email)) {
+    if (email === "" || !/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
         return; // Don't check if email is empty or invalid
     }
     
+    var checkUrl = window.location.pathname.indexOf('/Admin/') !== -1 ? '../check_email.php' : 'check_email.php';
     var xhr = new XMLHttpRequest();
-    xhr.open("POST", "check_email.php", true);
+    xhr.open("POST", checkUrl, true);
     xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     
     xhr.onreadystatechange = function() {

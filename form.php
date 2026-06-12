@@ -37,7 +37,7 @@
 
       <fieldset>
         <legend style="color:red;">Reg Form</legend>
-        <form action="dummy.php" method="POST" enctype="multipart/form-data" onsubmit="return validation()">
+        <form action="form.php" method="POST" enctype="multipart/form-data" onsubmit="return validation()">
           <table border="0" cellpadding="10">
             <tr>
               <th><label>First Name : <span>*</span></label></th>
@@ -105,9 +105,9 @@
             
             <tr>
               <td align="center" colspan="3">
-                <input type="submit" name="submit" value="Register">
-                <input type="reset" name="Reset" value="Cancel">
-                 <a href="login.php" id="btn" class="text-decoration-none btn btn-warning ">Login Here</a>
+                <input id="submit_btn" type="submit" name="submit" value="Register" class="btn btn-primary px-4 py-2">
+                <input type="reset" name="Reset" value="Cancel" class="btn btn-secondary px-4 py-2 ms-2">
+                <a href="login.php" id="btn" class="text-decoration-none btn btn-warning ms-2">Login Here</a>
               </td>
             </tr>
           </table>
