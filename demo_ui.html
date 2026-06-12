@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UI Demo — Blog Project</title>
+  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <div class="container">
+      <a class="navbar-brand fancy-underline" href="#">My Blog</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navmain">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navmain">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="#">Posts</a></li>
+          <li class="nav-item"><a class="btn btn-primary btn-animate ms-2" href="#">Get Started</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <section class="hero-section p-5 mb-5 animate-fade-up">
+      <div class="row align-items-center">
+        <div class="col-md-7">
+          <h1 class="display-5">Beautiful, fast blogging</h1>
+          <p class="lead">Responsive layout, subtle animations, and a clean reading experience. Apply classes like <code>.animate-fade-up</code> and <code>.animate-card</code> to enhance UI.</p>
+          <a class="btn btn-outline-primary btn-animate" href="#">See demo</a>
+        </div>
+        <div class="col-md-5 text-center">
+          <img class="featured-image shadow rounded animate-fade-up reveal-delay-2" src="https://via.placeholder.com/420x260.png?text=Demo+Image" alt="demo">
+        </div>
+      </div>
+    </section>
+
+    <section class="row g-4">
+      <div class="col-md-4">
+        <div class="card animate-card reveal-delay-1">
+          <img src="https://via.placeholder.com/600x300.png?text=Post+1" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Post title one</h5>
+            <p class="card-text">Short excerpt to show card layout and hover effects.</p>
+            <a href="#" class="btn btn-primary btn-animate">Read</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card animate-card reveal-delay-2">
+          <img src="https://via.placeholder.com/600x300.png?text=Post+2" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Post title two</h5>
+            <p class="card-text">Another excerpt to demonstrate consistent styling.</p>
+            <a href="#" class="btn btn-outline-primary btn-animate">Read</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4">
+        <div class="card animate-card reveal-delay-3">
+          <img src="https://via.placeholder.com/600x300.png?text=Post+3" class="card-img-top" alt="...">
+          <div class="card-body">
+            <h5 class="card-title">Post title three</h5>
+            <p class="card-text">Third example card with the same animation.</p>
+            <a href="#" class="btn btn-primary btn-animate">Read</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
